@@ -3,18 +3,18 @@ class Graph {
         this.nodes = [];
     }
 
-    createNode(val, edges) {
-        console.log(val);
-        if (val === undefined) {
-            console.log(`Node value is undefined`);
+    createNode(val, x, y, edges) {
+        if (val === undefined || val == '') {
+            console.log('Node value is undefined or empty');
             return;
         }
-        if (this.nodes.find(x => x.value === val) !== undefined) {
-            console.log(`Nazwa ${val} jest już zajęta!`)
+        console.log(this.nodes);
+        if (this.nodes.find(n => n.value === val) !== undefined) {
+            console.log(`Value ${val} already used!`)
             return;
         }
 
-        let node = new Node(val, edges);
+        let node = new Node(val, x, y, edges);
         this.nodes.push(node);
     }
 
