@@ -18,4 +18,8 @@ function setup() {
 
 function draw() {
     background(51);
+    translate(width/2, height/2);
+    for(let i = 0; i < graph.nodes.length; i++){
+        graph.nodes[i].show();
+    }
 }
