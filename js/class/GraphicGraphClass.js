@@ -36,7 +36,7 @@ class GraphicGraph extends Graph {
         for(let i = 0; i < this.nodes.length; i++){
             let currentNode = this.nodes[i];
             let dist = p5.Vector.dist(currentNode.pos, searchPos);
-            if(dist < currentNode.r){
+            if(dist < currentNode.r / 2){
                 return currentNode;
             }
         }
