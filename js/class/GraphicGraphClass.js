@@ -30,4 +30,17 @@ class GraphicGraph extends Graph {
         }
 
     }
+
+    getNodeInPos(x, y) {
+        let searchPos = createVector(x, y);
+        for(let i = 0; i < this.nodes.length; i++){
+            let currentNode = this.nodes[i];
+            let dist = p5.Vector.dist(currentNode.pos, searchPos);
+            console.log(dist);
+            if(dist < currentNode.r){
+                return currentNode;
+            }
+        }
+        return undefined;
+    }
 }

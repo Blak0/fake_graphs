@@ -11,11 +11,10 @@ function setup() {
     graph.createNode('kuba', 200, 200);
 
     graph.attachNodes('kuba', 'lukasz');
-    
 }
 
 function draw() {
     background(backgroundColor);
-    translate(width/2, height/2);
+    translate(width / 2, height / 2);
     graph.show();
 }

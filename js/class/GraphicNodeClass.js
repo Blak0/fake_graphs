@@ -3,6 +3,7 @@ class GraphicNode extends Node {
         super(val, edges);
         this.pos = createVector(x, y);
         this.r = 100;
+        this.lockedToMouse = false;
     }
 
     show(){
@@ -14,6 +15,19 @@ class GraphicNode extends Node {
         let fontSize = 26;
         textSize(fontSize);
         fill(255);
-        writeCenteredText(this.pos, this.value, fontSize)
+        writeCenteredText(this.pos, this.value, fontSize);
+
+        if(this.lockedToMouse){
+            this.pos.x = mouseX - width/2;
+            this.pos.y = mouseY - height/2;
+        }
+    }
+
+    followMouse(){
+        this.lockedToMouse = true;
+    }
+
+    unfollowMouse(){
+        this.lockedToMouse = false;
     }
 }
