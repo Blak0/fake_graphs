@@ -6,12 +6,14 @@ class GraphicNode extends Node {
     }
 
     show(){
-        noFill();
+        fill(backgroundColor);
         stroke(255);
         strokeWeight(2);
         ellipse(this.pos.x, this.pos.y, this.r);
+
         let fontSize = 26;
         textSize(fontSize);
+        fill(255);
         writeCenteredText(this.pos, this.value, fontSize)
     }
 }

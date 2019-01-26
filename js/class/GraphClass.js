@@ -3,17 +3,23 @@ class Graph {
         this.nodes = [];
     }
 
-    createNode(val, x, y, edges) {
+    checkIfUndefinedOrUsed(val) {
         if (val === undefined || val == '') {
             console.log('Node value is undefined or empty');
-            return;
+            return true;
         }
         if (this.nodes.find(n => n.value === val) !== undefined) {
             console.log(`Value ${val} already used!`)
+            return true;
+        }
+        return false;
+    }
+
+    createNode(val, x, y, edges) {
+        if (this.checkIfUndefinedOrUsed(val)) {
             return;
         }
-
-        let node = new GraphicNode(val, x, y, edges);
+        let node = new Node(val, x, y, edges);
         this.nodes.push(node);
     }
 

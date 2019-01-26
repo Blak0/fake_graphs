@@ -1,8 +1,10 @@
 var graph;
 var addInput, addButton;
 
+var backgroundColor = 51;
+
 function setup() {
-    graph = new Graph();
+    graph = new GraphicGraph();
     let footerHeight = 50;
     createCanvas(innerWidth, innerHeight - footerHeight);
 
@@ -14,12 +16,16 @@ function setup() {
     addButton.mousePressed(function () {
         graph.createNode(addInput.value(), 0, 0);
     });
+
+    graph.createNode('lukasz', 0, 0);
+    graph.createNode('kuba', 200, 200);
+
+    graph.attachNodes('kuba', 'lukasz');
+    
 }
 
 function draw() {
-    background(51);
+    background(backgroundColor);
     translate(width/2, height/2);
-    for(let i = 0; i < graph.nodes.length; i++){
-        graph.nodes[i].show();
-    }
+    graph.show();
 }
