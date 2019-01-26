@@ -1,5 +1,4 @@
 var graph;
-var addInput, addButton;
 
 var backgroundColor = 51;
 
