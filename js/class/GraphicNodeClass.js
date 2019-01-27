@@ -4,10 +4,11 @@ class GraphicNode extends Node {
         this.pos = createVector(x, y);
         this.r = 100;
         this.lockedToMouse = false;
+        this.backgroundColor = backgroundColor;
     }
 
     show(){
-        fill(backgroundColor);
+        fill(this.backgroundColor);
         stroke(255);
         strokeWeight(2);
         ellipse(this.pos.x, this.pos.y, this.r);

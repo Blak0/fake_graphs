@@ -5,9 +5,8 @@ class Node {
         this.visited = false;
     }
 
-    isAttached(neighbour){
-        //Checks if this node is attached to given node
-        if(this.edges.find(x => neighbour.value == x)!== undefined){
+    isAttached(neighbour) {
+        if(this.edges.includes(neighbour.value)){
             return true;
         }
         return false;

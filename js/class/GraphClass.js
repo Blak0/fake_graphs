@@ -45,7 +45,6 @@ class Graph {
             node1.edges.push(val2);
         }
         if (!node2.edges.includes(val1)) {
-
             node2.edges.push(val1);
         }
     }
