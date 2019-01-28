@@ -4,16 +4,16 @@ let attachEndNode;
 
 class MoveEvent {
     mousePressed() {
-        MoveEvent.clickedNode = graph.getNodeInPos(mouseX - width / 2, mouseY - height / 2);
+        clickedNode = graph.getNodeInPos(mouseX - width / 2, mouseY - height / 2);
         if (!clickedNode) {
             return;
         }
-        MoveEvent.clickedNode.followMouse();
+        clickedNode.followMouse();
     }
 
     mouseReleased() {
-        if (MoveEvent.clickedNode) {
-            MoveEvent.clickedNode.unfollowMouse();
+        if (clickedNode) {
+            clickedNode.unfollowMouse();
         }
     }
 }

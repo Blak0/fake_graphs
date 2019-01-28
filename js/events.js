@@ -1,4 +1,4 @@
-//starting mode
+
 let currentEvent = new MoveEvent();
 
 function mousePressed() {
@@ -8,8 +8,9 @@ function mousePressed() {
     else if (attachCheckbox.checked()) {
         currentEvent = new AttachEvent();
     }
-    currentEvent.mousePressed();
-
+    if(typeof(currentEvent !== null)){
+        currentEvent.mousePressed();
+    }
 }
 
 function mouseReleased() {
