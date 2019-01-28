@@ -20,7 +20,7 @@ class UI {
 
         workingPos += addButton.width + 15;
 
-        moveCheckbox = createCheckbox('Moving mode');
+        moveCheckbox = createCheckbox('Moving mode', true);
         moveCheckbox.position(workingPos, footerCenter - moveCheckbox.height / 2);
         moveCheckbox.width = 100;
         checkboxes.push(moveCheckbox);
