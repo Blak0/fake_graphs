@@ -26,7 +26,7 @@ class AttachEvent {
         }
 
         attachStartNode.backgroundColor = 35;
-        attachLine = new DraggedLine(attachStartNode.pos.x, attachStartNode.pos.y);
+        attachLine = new AttachLine(attachStartNode.pos.x, attachStartNode.pos.y);
     }
 
     mouseReleased() {

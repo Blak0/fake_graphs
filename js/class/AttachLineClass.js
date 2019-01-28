@@ -1,6 +1,6 @@
 let attachLine = undefined;
 
-class DraggedLine {
+class AttachLine {
     constructor(x, y) {
         this.startPos = createVector(x, y);
     }
