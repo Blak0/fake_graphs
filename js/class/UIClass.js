@@ -1,8 +1,11 @@
 var addInput, addButton;
 var moveCheckbox;
 var attachCheckbox;
+var detachCheckbox;
 
 var checkboxes = [];
+
+//UI class describes ui placement and links it to behaviour in events.js and eventClasses.js
 class UI {
     static initUI() {
         let footerHeight = 50;
@@ -32,11 +35,19 @@ class UI {
         attachCheckbox.width = 100;
         checkboxes.push(attachCheckbox);
 
+        workingPos += attachCheckbox.width + 15;
+
+        detachCheckbox = createCheckbox('Detach mode');
+        detachCheckbox.position(workingPos, footerCenter - detachCheckbox.height / 2);
+        detachCheckbox.width = 100;
+        checkboxes.push(detachCheckbox);
+
         addButton.mousePressed(() => {
             graph.createNode(addInput.value(), 0, 0);
             addInput.value('');
         });
 
+        //if checkbox is checked uncheck other checkboxes (because you can be in only one mode)
         for (let i = 0; i < checkboxes.length; i++) {
             checkboxes[i].changed(function () {
                 if (checkboxes[i].checked()) {

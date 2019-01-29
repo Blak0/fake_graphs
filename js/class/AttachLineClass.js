@@ -1,6 +1,7 @@
 let attachLine = undefined;
 
 class AttachLine {
+    //class used to show the line on drag in attach mode
     constructor(x, y) {
         this.startPos = createVector(x, y);
     }

@@ -1,9 +1,11 @@
+//this class adds methods for working with nodes on canvas
 class GraphicGraph extends Graph {
     constructor() {
         super();
     }
 
     createNode(val, x, y, edges) {
+        //override createNode to use GraphicNode instead of Node
         if (super.checkIfUndefinedOrUsed(val)) {
             return;
         }

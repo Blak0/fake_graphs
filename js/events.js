@@ -8,13 +8,12 @@ function mousePressed() {
     else if (attachCheckbox.checked()) {
         currentEvent = new AttachEvent();
     }
-    if(typeof(currentEvent !== null)){
-        currentEvent.mousePressed();
+    else if (detachCheckbox.checked()){
+        currentEvent = new DetachEvent();
     }
+    currentEvent.mousePressed();
 }
 
 function mouseReleased() {
-    if(typeof(currentEvent !== null)){
-        currentEvent.mouseReleased();
-    }
+    currentEvent.mouseReleased();
 }

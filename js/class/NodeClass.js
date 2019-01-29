@@ -1,3 +1,4 @@
+//Node class used in Graph
 class Node {
     constructor(val, edges = []) {
         this.value = val;

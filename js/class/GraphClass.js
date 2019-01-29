@@ -1,3 +1,4 @@
+//this is the logical implementation of a graph
 class Graph {
     constructor() {
         this.nodes = [];

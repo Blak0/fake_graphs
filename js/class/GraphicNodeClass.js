@@ -1,3 +1,4 @@
+//this class adds methods and custom methods for moving nodes on canvas
 class GraphicNode extends Node {
     constructor(val, x, y, edges){
         super(val, edges);
