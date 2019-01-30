@@ -8,7 +8,6 @@ class Graph {
             console.log('Node value is undefined or empty');
             return;
         }
-        console.log(this.nodes);
         if (this.nodes.find(n => n.value === val) !== undefined) {
             console.log(`Value ${val} already used!`)
             return;
@@ -48,7 +47,6 @@ class Graph {
     detachNodes(val1, val2) {
         let node1 = this.getNodeFromValue(val1);
         let node2 = this.getNodeFromValue(val2);
-        console.log(node2);
 
         let index1 = node2.edges.findIndex(x => x.value == val1);
         let index2 = node1.edges.findIndex(x => x.value == val2);
@@ -59,5 +57,24 @@ class Graph {
 
     getNodeFromValue(val) {
         return this.nodes.find(x => x.value == val);
+    }
+
+    search(startValue, destinationValue) {
+        let q = new Queue();
+        q.push(startValue);
+        while (q.length > 0) {
+            let nodeValue = q.pop();
+            let node = this.getNodeFromValue(nodeValue)
+            if (nodeValue === destinationValue) {
+                return node;
+            }
+            node.edges.map(edge => {
+                if (this.getNodeFromValue(edge).visited === false) {
+                    q.push(edge);
+                }
+            });
+            node.visited = true;
+        }
+        return null;
     }
 }
