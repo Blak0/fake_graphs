@@ -1,23 +1,22 @@
 var graph;
-var addInput, addButton;
+
+var backgroundColor = 51;
 
 function setup() {
-    graph = new Graph();
-    
-    let footerHeight = 50;
-    createCanvas(innerWidth, innerHeight - footerHeight);
+    graph = new GraphicGraph();
+    UI.initUI();
 
-    addInput = createInput();
-    addInput.position(20, innerHeight - footerHeight / 2 - addInput.height / 2);
-    addButton = createButton('Add node');
-    addButton.position(25 + addInput.width, innerHeight - footerHeight / 2 - addButton.height / 2);
+    graph.createNode('lukasz', 0, 0);
+    graph.createNode('kuba', 200, 200);
 
-
-    addButton.mousePressed(function () {
-        graph.createNode(addInput.value(), 0, 0);
-    });
+    graph.attachNodes('kuba', 'lukasz');
 }
 
 function draw() {
-    background(51);
+    background(backgroundColor);
+    translate(width / 2, height / 2);
+    graph.show();
+    if (attachLine) {
+        attachLine.show();
+    }
 }
