@@ -3,11 +3,6 @@ var addInput, addButton;
 
 function setup() {
     graph = new Graph();
-    graph.createNode('andrzej');
-    graph.createNode('lukasz');
-    graph.createNode('menel');
-    graph.attachNodes('andrzej', 'menel');
-    graph.attachNodes('lukasz', 'andrzej');
     
     let footerHeight = 50;
     createCanvas(innerWidth, innerHeight - footerHeight);
@@ -25,6 +20,4 @@ function setup() {
 
 function draw() {
     background(51);
-    console.log(graph.search('lukasz', 'chuj'));
-    noLoop();
 }

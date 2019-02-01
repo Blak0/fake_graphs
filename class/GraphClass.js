@@ -64,13 +64,37 @@ class Graph {
         q.push(startValue);
         while (q.length > 0) {
             let nodeValue = q.pop();
-            let node = this.getNodeFromValue(nodeValue)
+            let node = this.getNodeFromValue(nodeValue);
             if (nodeValue === destinationValue) {
                 return node;
             }
             node.edges.map(edge => {
                 if (this.getNodeFromValue(edge).visited === false) {
                     q.push(edge);
+                }
+            });
+            node.visited = true;
+        }
+        return null;
+    }
+
+    shortestPath(startValue, destinationValue) {
+        let q = new Queue();
+        q.push(startValue);
+        this.getNodeFromValue(startValue).pathFromStart = [startValue];
+        while (q.length > 0){
+            let nodeValue = q.pop();
+            let node = this.getNodeFromValue(nodeValue);
+            if (nodeValue === destinationValue) {
+                return node.pathFromStart;
+            }
+            node.edges.map(edge => {
+                let edgeNode = this.getNodeFromValue(edge);
+                if (edgeNode.visited === false) {
+                    q.push(edge);
+                    let newPath = node.pathFromStart.concat([edge]);
+                    edgeNode.pathFromStart = newPath;
+                    edgeNode.visited = true;
                 }
             });
             node.visited = true;

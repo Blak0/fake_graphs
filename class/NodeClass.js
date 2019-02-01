@@ -4,5 +4,6 @@ class Node {
         this.value = val;
         this.edges = edges;
         this.visited = false;
+        this.pathFromStart = [];
     }
 }
