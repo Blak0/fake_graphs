@@ -5,6 +5,7 @@ class Node {
         this.edges = edges;
         this.visited = false;
         this.pathFromStart = false;
+        this.belongsToPath = false;
     }
 
     isAttached(neighbour) {

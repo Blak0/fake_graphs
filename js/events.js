@@ -8,10 +8,10 @@ function mousePressed() {
     else if (attachCheckbox.checked()) {
         currentEvent = new AttachEvent();
     }
-    else if (detachCheckbox.checked()){
+    else if (detachCheckbox.checked()) {
         currentEvent = new DetachEvent();
     }
-    else if(findPathCheckbox.checked()){
+    else if (findPathCheckbox.checked()) {
         currentEvent = new FindPathEvent();
     }
     currentEvent.mousePressed();
