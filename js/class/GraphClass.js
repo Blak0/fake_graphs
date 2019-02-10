@@ -89,10 +89,10 @@ class Graph {
         let q = new Queue();
         q.push(startValue);
         this.getNodeFromValue(startValue).pathFromStart = [startValue];
-        while (q.length > 0){
+        while (q.length > 0) {
             let nodeValue = q.pop();
             let node = this.getNodeFromValue(nodeValue);
-            if (nodeValue === destinationValue) {
+            if (nodeValue == destinationValue) {
                 return node.pathFromStart;
             }
             node.edges.map(edge => {

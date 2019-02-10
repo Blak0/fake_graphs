@@ -11,6 +11,9 @@ function mousePressed() {
     else if (detachCheckbox.checked()){
         currentEvent = new DetachEvent();
     }
+    else if(findPathCheckbox.checked()){
+        currentEvent = new FindPathEvent();
+    }
     currentEvent.mousePressed();
 }
 

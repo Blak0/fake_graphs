@@ -2,6 +2,7 @@ var addInput, addButton;
 var moveCheckbox;
 var attachCheckbox;
 var detachCheckbox;
+var findPathCheckbox;
 
 var checkboxes = [];
 
@@ -41,6 +42,13 @@ class UI {
         detachCheckbox.position(workingPos, footerCenter - detachCheckbox.height / 2);
         detachCheckbox.width = 100;
         checkboxes.push(detachCheckbox);
+
+        workingPos += detachCheckbox.width + 15;
+
+        findPathCheckbox = createCheckbox('Find path mode');
+        findPathCheckbox.position(workingPos, footerCenter - findPathCheckbox.height / 2);
+        findPathCheckbox.width = 100;
+        checkboxes.push(findPathCheckbox);
 
         addButton.mousePressed(() => {
             graph.createNode(addInput.value(), 0, 0);
