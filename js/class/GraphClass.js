@@ -26,11 +26,14 @@ class Graph {
 
     destroyNode(val) {
         var index = this.nodes.findIndex(x => x.value == val);
+        let destroyedNode = this.nodes[index];
+        if(destroyedNode === undefined){
+            return;
+        }
         for (var i = 0; i < this.nodes.length; i++) {
             if (i == index) { continue; }
-            iteratingNode = this.getNodeFromValue(this.nodes[i]);
-            destroyedNode = this.nodes[index];
-            this.detachNodes(this.getNodeFromValue(destroyedNode, iteratingNode));
+            let iteratingNode = this.nodes[i];
+            this.detachNodes(destroyedNode.value, iteratingNode.value);
         }
         this.nodes.splice(index, 1);
     }
@@ -41,7 +44,6 @@ class Graph {
         if (node1 === undefined || node2 === undefined) {
             return;
         }
-
         if (!node1.edges.includes(val2)) {
             node1.edges.push(val2);
         }
@@ -53,6 +55,10 @@ class Graph {
     detachNodes(val1, val2) {
         let node1 = this.getNodeFromValue(val1);
         let node2 = this.getNodeFromValue(val2);
+
+        if (node1 === undefined || node2 === undefined) {
+            return;
+        }
 
         let index1 = node2.edges.findIndex(x => x.value == val1);
         let index2 = node1.edges.findIndex(x => x.value == val2);
