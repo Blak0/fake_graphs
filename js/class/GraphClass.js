@@ -1,7 +1,6 @@
 class Graph {
     constructor() {
         this.nodes = [];
-        this.path = [];
     }
 
     createNode(name, x, y, edges) {
