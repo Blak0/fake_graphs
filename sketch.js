@@ -5,7 +5,7 @@ var yOffset;
 var backgroundColor = 51;
 
 function setup() {
-    graph = new GraphicGraph();
+    graph = new Graph();
     UI.initUI();
     xOffset = width/2;
     yOffset = height/2;
