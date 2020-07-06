@@ -20,8 +20,8 @@ class GraphicNode extends Node {
         writeCenteredText(this.pos, this.value, fontSize);
 
         if(this.lockedToMouse){
-            this.pos.x = mouseX - width/2;
-            this.pos.y = mouseY - height/2;
+            this.pos.x = mouseX - xOffset;
+            this.pos.y = mouseY - yOffset;
         }
     }
 

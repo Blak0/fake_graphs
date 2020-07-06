@@ -8,7 +8,7 @@ let endNode;
 //each event represents individual mode
 class MoveEvent {
     mousePressed() {
-        clickedNode = graph.getNodeInPos(mouseX - width / 2, mouseY - height / 2);
+        clickedNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
         if (!clickedNode) {
             return;
         }
@@ -24,7 +24,7 @@ class MoveEvent {
 
 class AttachEvent {
     mousePressed() {
-        startNode = graph.getNodeInPos(mouseX - width / 2, mouseY - height / 2);
+        startNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
         if (!startNode) {
             return;
         }
@@ -37,7 +37,7 @@ class AttachEvent {
         if (!startNode) {
             return;
         }
-        endNode = graph.getNodeInPos(mouseX - width / 2, mouseY - height / 2);
+        endNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
 
         attachLine = undefined;
         startNode.backgroundColor = backgroundColor;
@@ -56,7 +56,7 @@ class AttachEvent {
 
 class DetachEvent {
     mousePressed() {
-        startNode = graph.getNodeInPos(mouseX - width / 2, mouseY - height / 2);
+        startNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
         if (!startNode) {
             return;
         }
@@ -68,7 +68,7 @@ class DetachEvent {
         if (!startNode) {
             return;
         }
-        endNode = graph.getNodeInPos(mouseX - width / 2, mouseY - height / 2);
+        endNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
 
         startNode.backgroundColor = backgroundColor;
 
@@ -86,7 +86,7 @@ class DetachEvent {
 
 class FindPathEvent {
     mousePressed() {
-        startNode = graph.getNodeInPos(mouseX - width / 2, mouseY - height / 2);
+        startNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
         graph.nodes.map(node => node.belongsToPath = false);
         if (!startNode) {
             return;
@@ -96,7 +96,7 @@ class FindPathEvent {
         if (!startNode) {
             return;
         }
-        endNode = graph.getNodeInPos(mouseX - width / 2, mouseY - height / 2);
+        endNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
 
         if (startNode === undefined || endNode === undefined) {
             return;
