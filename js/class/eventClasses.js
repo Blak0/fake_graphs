@@ -47,7 +47,7 @@ class AttachEvent {
         }
 
         if (startNode !== endNode) {
-            graph.attachNodes(startNode.value, endNode.value);
+            graph.attachNodes(startNode, endNode);
         }
         startNode = undefined;
         endNode = undefined;
@@ -77,7 +77,7 @@ class DetachEvent {
         }
 
         if (startNode !== endNode) {
-            graph.detachNodes(startNode.value, endNode.value);
+            graph.detachNodes(startNode, endNode);
         }
         startNode = undefined;
         endNode = undefined;

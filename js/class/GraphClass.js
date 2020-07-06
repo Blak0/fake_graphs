@@ -35,30 +35,25 @@ class Graph {
         this.nodes.splice(index, 1);
     }
 
-    attachNodes(val1, val2) {
-        let node1 = this.getNodeFromValue(val1);
-        let node2 = this.getNodeFromValue(val2);
+    attachNodes(node1, node2) {
         if (node1 === undefined || node2 === undefined) {
             return;
         }
-        if (!node1.edges.includes(val2)) {
-            node1.edges.push(val2);
+        if (!node1.edges.includes(node2.value)) {
+            node1.edges.push(node2.value);
         }
-        if (!node2.edges.includes(val1)) {
-            node2.edges.push(val1);
+        if (!node2.edges.includes(node1.value)) {
+            node2.edges.push(node1.value);
         }
     }
 
-    detachNodes(val1, val2) {
-        let node1 = this.getNodeFromValue(val1);
-        let node2 = this.getNodeFromValue(val2);
-
+    detachNodes(node1, node2) {
         if (node1 === undefined || node2 === undefined) {
             return;
         }
 
-        let index1 = node2.edges.findIndex(x => x.value == val1);
-        let index2 = node1.edges.findIndex(x => x.value == val2);
+        let index1 = node2.edges.findIndex(x => x.value == node1.value);
+        let index2 = node1.edges.findIndex(x => x.value == node2.value);
 
         node2.edges.splice(index1, 1);
         node1.edges.splice(index2, 1);
