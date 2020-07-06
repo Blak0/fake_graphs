@@ -108,23 +108,22 @@ class Graph {
     }
 
     show() {
+        noFill();
         for (let i = 0; i < this.nodes.length; i++) {
             for (let j = 0; j < this.nodes.length; j++) {
                 let node1 = this.nodes[i];
                 let node2 = this.nodes[j];
                 if (node1.value !== node2.value && node1.isAttached(node2)) {
-
+                    
                     if (node1.belongsToPath && node2.belongsToPath) {
-                        noFill();
                         stroke(0, 255, 0);
                         strokeWeight(4);
-                        line(node1.pos.x, node1.pos.y, node2.pos.x, node2.pos.y);
                     } else {
-                        noFill();
                         stroke(255);
                         strokeWeight(3);
-                        line(node1.pos.x, node1.pos.y, node2.pos.x, node2.pos.y);
                     }
+                    line(node1.pos.x, node1.pos.y, node2.pos.x, node2.pos.y);
+
                 }
             }
         }
