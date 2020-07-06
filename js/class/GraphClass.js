@@ -1,10 +1,11 @@
 class Graph {
     constructor() {
         this.nodes = [];
+        this.path = [];
     }
 
     createNode(name, x, y, edges) {
-        if (name && this.checkIfNodeNameUsed(name)) {
+        if (name && name !== '' && this.checkIfNodeNameUsed(name)) {
             return;
         }
         let node = new GraphNode(name, x, y, edges);
@@ -39,11 +40,11 @@ class Graph {
         if (node1 === undefined || node2 === undefined) {
             return;
         }
-        if (!node1.edges.includes(node2.value)) {
-            node1.edges.push(node2.value);
+        if (!node1.edges.includes(node2)) {
+            node1.edges.push(node2);
         }
-        if (!node2.edges.includes(node1.value)) {
-            node2.edges.push(node1.value);
+        if (!node2.edges.includes(node1)) {
+            node2.edges.push(node1);
         }
     }
 
@@ -63,48 +64,41 @@ class Graph {
         return this.nodes.find(x => x.value == val);
     }
 
-    search(startValue, destinationValue) {
+    shortestPath(startNode, destinationNode) {
+        this.resetNodesSearchVars()
         let q = new Queue();
-        q.push(startValue);
+        q.push(startNode);
+        startNode.pathFromStart = [startNode];
         while (q.length > 0) {
-            let nodeValue = q.pop();
-            let node = this.getNodeFromValue(nodeValue);
-            if (nodeValue === destinationValue) {
-                return node;
+            let node = q.pop();
+            if (node == destinationNode) {
+                node.pathFromStart.forEach(node => {
+                    node.belongsToPath = true;
+                });
+                return node.pathFromStart;
             }
-            node.edges.map(edge => {
-                if (this.getNodeFromValue(edge).visited === false) {
-                    q.push(edge);
-                    this.getNodeFromValue(edge).visited = true;
+            node.edges.map(edgeNode => {
+                if (edgeNode.visited) {
+                    return;
                 }
+                q.push(edgeNode);
+                console.log(node.pathFromStart);
+                edgeNode.pathFromStart = node.pathFromStart.concat([edgeNode]);
+                edgeNode.visited = true;
+
             });
             node.visited = true;
         }
         return null;
     }
 
-    shortestPath(startValue, destinationValue) {
-        let q = new Queue();
-        q.push(startValue);
-        this.getNodeFromValue(startValue).pathFromStart = [startValue];
-        while (q.length > 0) {
-            let nodeValue = q.pop();
-            let node = this.getNodeFromValue(nodeValue);
-            if (nodeValue == destinationValue) {
-                return node.pathFromStart;
-            }
-            node.edges.map(edge => {
-                let edgeNode = this.getNodeFromValue(edge);
-                if (edgeNode.visited === false) {
-                    q.push(edge);
-                    let newPath = node.pathFromStart.concat([edge]);
-                    edgeNode.pathFromStart = newPath;
-                    edgeNode.visited = true;
-                }
-            });
-            node.visited = true;
-        }
-        return null;
+    resetNodesSearchVars() {
+        graph.nodes.forEach(node => {
+            node.belongsToPath = false;
+            node.visited = false;
+            node.pathFromStart = [];
+
+        });
     }
 
     show() {
@@ -114,7 +108,7 @@ class Graph {
                 let node1 = this.nodes[i];
                 let node2 = this.nodes[j];
                 if (node1.value !== node2.value && node1.isAttached(node2)) {
-                    
+
                     if (node1.belongsToPath && node2.belongsToPath) {
                         stroke(0, 255, 0);
                         strokeWeight(4);

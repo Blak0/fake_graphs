@@ -87,7 +87,6 @@ class DetachEvent {
 class FindPathEvent {
     mousePressed() {
         startNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
-        graph.nodes.map(node => node.belongsToPath = false);
         if (!startNode) {
             return;
         }
@@ -107,23 +106,18 @@ class FindPathEvent {
         }
 
 
-        let path = graph.shortestPath(startNode.value, endNode.value);
+        let path = graph.shortestPath(startNode, endNode);
         if (!path) {
             alert("Nodes aren't connected.")
         }
         else {
             let message = 'Shortest path: ';
             for (let i = 0; i < path.length; i++) {
-                message += path[i] + ' -> ';
+                message += path[i].value + ' -> ';
             }
             message = message.slice(0, message.length - 4); //remove last arrow
-
-            path.map(nodeValue => graph.getNodeFromValue(nodeValue).belongsToPath = true);
             alert(message);
         }
-
-        graph.nodes.map(node => node.visited = false);
-
 
         startNode = undefined;
         endNode = undefined;

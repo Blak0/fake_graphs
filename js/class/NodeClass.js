@@ -14,7 +14,7 @@ class GraphNode {
     }
 
     isAttached(neighbour) {
-        if (this.edges.includes(neighbour.value)) {
+        if (this.edges.includes(neighbour)) {
             return true;
         }
         return false;
