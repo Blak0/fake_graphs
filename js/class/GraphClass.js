@@ -3,34 +3,32 @@ class Graph {
         this.nodes = [];
     }
 
-    checkIfUndefinedOrUsed(val) {
-        if (val === undefined || val == '') {
-            console.log('Node value is undefined or empty');
-            return true;
+    createNode(name, x, y, edges) {
+        if (name && this.checkIfNodeNameUsed(name)) {
+            return;
         }
-        if (this.nodes.find(n => n.value === val) !== undefined) {
-            console.log(`Value ${val} already used!`)
+        let node = new GraphNode(name, x, y, edges);
+        this.nodes.push(node);
+    }
+
+    checkIfNodeNameUsed(name) {
+        if (this.nodes.find(n => n.value === name)) {
+            console.log(`Value ${name} already used!`)
             return true;
         }
         return false;
     }
 
-    createNode(val, x, y, edges) {
-        if (this.checkIfUndefinedOrUsed(val)) {
-            return;
-        }
-        let node = new GraphNode(val, x, y, edges);
-        this.nodes.push(node);
-    }
-
     destroyNode(val) {
         var index = this.nodes.findIndex(x => x.value == val);
         let destroyedNode = this.nodes[index];
-        if(destroyedNode === undefined){
+        if (destroyedNode === undefined) {
             return;
         }
         for (var i = 0; i < this.nodes.length; i++) {
-            if (i == index) { continue; }
+            if (i == index) {
+                continue;
+            }
             let iteratingNode = this.nodes[i];
             this.detachNodes(destroyedNode.value, iteratingNode.value);
         }
@@ -126,8 +124,7 @@ class Graph {
                         stroke(0, 255, 0);
                         strokeWeight(4);
                         line(node1.pos.x, node1.pos.y, node2.pos.x, node2.pos.y);
-                    }
-                    else {
+                    } else {
                         noFill();
                         stroke(255);
                         strokeWeight(3);
