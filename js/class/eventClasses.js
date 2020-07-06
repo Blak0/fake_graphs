@@ -1,116 +1,86 @@
-//MoveEvent variables
-let clickedNode;
-
-//Attach/Detach Event variables
-let startNode;
-let endNode;
-
-//each event represents individual mode
-class MoveEvent {
+class ModeEvent {
+    constructor(node) {
+        this.eventNode = node;
+    }
+}
+class MoveEvent extends ModeEvent {
     mousePressed() {
-        clickedNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
-        if (!clickedNode) {
-            return;
-        }
-        clickedNode.followMouse();
+        this.eventNode.followMouse();
     }
 
     mouseReleased() {
-        if (clickedNode) {
-            clickedNode.unfollowMouse();
-        }
+        this.eventNode.unfollowMouse();
     }
 }
 
-class AttachEvent {
+class AttachEvent extends ModeEvent {
     mousePressed() {
-        startNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
-        if (!startNode) {
-            return;
-        }
-
-        startNode.backgroundColor = 35;
-        attachLine = new AttachLine(startNode.pos.x, startNode.pos.y);
+        this.eventNode.backgroundColor = 35;
+        attachLine = new AttachLine(this.eventNode.pos.x, this.eventNode.pos.y);
     }
 
     mouseReleased() {
-        if (!startNode) {
-            return;
-        }
-        endNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
+        let attachingNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
 
         attachLine = undefined;
-        startNode.backgroundColor = backgroundColor;
+        this.eventNode.backgroundColor = backgroundColor;
 
-        if (startNode === undefined || endNode === undefined) {
+        if (!attachingNode) {
             return;
         }
 
-        if (startNode !== endNode) {
-            graph.attachNodes(startNode, endNode);
+        if (this.eventNode !== attachingNode) {
+            graph.attachNodes(this.eventNode, attachingNode);
         }
-        startNode = undefined;
-        endNode = undefined;
     }
 }
 
-class DetachEvent {
+class DetachEvent extends ModeEvent {
     mousePressed() {
-        startNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
-        if (!startNode) {
-            return;
-        }
-
-        startNode.backgroundColor = 175;
+        this.eventNode.backgroundColor = 175;
     }
 
     mouseReleased() {
-        if (!startNode) {
-            return;
-        }
-        endNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
+        let detachNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
 
-        startNode.backgroundColor = backgroundColor;
+        this.eventNode.backgroundColor = backgroundColor;
 
-        if (startNode === undefined || endNode === undefined) {
+        if (!detachNode) {
             return;
         }
 
-        if (startNode !== endNode) {
-            graph.detachNodes(startNode, endNode);
+        if (this.eventNode !== detachNode) {
+            graph.detachNodes(this.eventNode, detachNode);
         }
-        startNode = undefined;
-        endNode = undefined;
     }
 }
 
-class FindPathEvent {
+class FindPathEvent extends ModeEvent {
     mousePressed() {
-        startNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
-        if (!startNode) {
+        this.eventNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
+        if (!this.eventNode) {
             return;
         }
     }
     mouseReleased() {
-        if (!startNode) {
+        if (!this.eventNode) {
             return;
         }
-        endNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
+        let endNode = graph.getNodeInPos(mouseX - xOffset, mouseY - yOffset);
 
-        if (startNode === undefined || endNode === undefined) {
-            return;
-        }
-
-        if (startNode === endNode) {
+        if (this.eventNode === undefined || endNode === undefined) {
             return;
         }
 
+        if (this.eventNode === endNode) {
+            return;
+        }
 
-        let path = graph.shortestPath(startNode, endNode);
+
+        let path = graph.shortestPath(this.eventNode, endNode);
         if (!path) {
             alert("Nodes aren't connected.")
-        }
-        else {
+        } else {
             let message = 'Shortest path: ';
             for (let i = 0; i < path.length; i++) {
                 message += path[i].value + ' -> ';
@@ -118,9 +88,6 @@ class FindPathEvent {
             message = message.slice(0, message.length - 4); //remove last arrow
             alert(message);
         }
-
-        startNode = undefined;
-        endNode = undefined;
     }
 
 
